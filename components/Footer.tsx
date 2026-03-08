@@ -8,7 +8,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <h3 className="text-2xl font-bold text-white mb-4">
-              La Reserva del Patriarca
+              Reserva del Patriarca
             </h3>
             <p className="text-gray-400 mb-6 max-w-md">
               37 viviendas de diseño moderno en Córdoba. Piscina, zonas verdes, 
@@ -82,7 +82,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm">
-            © 2026 La Reserva del Patriarca. Todos los derechos reservados.
+            © 2026 Reserva del Patriarca. Todos los derechos reservados.
           </p>
           <div className="flex gap-6 text-sm">
             <a href="#" className="hover:text-white transition-colors">

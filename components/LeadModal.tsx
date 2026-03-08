@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { supabase, Lead } from '@/lib/supabase'
-import { X, Phone, Mail, User, Check } from 'lucide-react'
+import { X, Phone, Mail, User, Check, Loader2 } from 'lucide-react'
 
 const leadSchema = z.object({
   nombre: z.string().min(2, 'Nombre requerido'),
@@ -92,7 +92,17 @@ export default function LeadModal({ pisoId, isOpen, onClose, onSuccess }: LeadMo
 
         {/* Content */}
         <div className="p-6">
-          {showSuccess ? (
+          {isSubmitting ? (
+            <div className="text-center py-12">
+              <Loader2 className="w-12 h-12 text-amber-600 animate-spin mx-auto mb-4" />
+              <h4 className="text-2xl font-semibold text-gray-900 mb-2">
+                Espera mientras carga la información
+              </h4>
+              <p className="text-gray-600">
+                Estamos preparando todos los detalles de la vivienda para ti...
+              </p>
+            </div>
+          ) : showSuccess ? (
             <div className="text-center py-8">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Check className="w-8 h-8 text-green-600" />
@@ -175,10 +185,13 @@ export default function LeadModal({ pisoId, isOpen, onClose, onSuccess }: LeadMo
                   />
                   <label htmlFor="terminos" className="text-sm text-gray-600">
                     Acepto la{' '}
-                    <a href="#" className="text-amber-700 hover:text-amber-800 underline">
+                    <a href="/privacidad" target="_blank" className="text-amber-700 hover:text-amber-800 underline">
                       política de privacidad
                     </a>{' '}
-                    y los términos y condiciones
+                    y los{' '}
+                    <a href="/terminos" target="_blank" className="text-amber-700 hover:text-amber-800 underline">
+                      términos y condiciones
+                    </a>
                   </label>
                 </div>
                 {errors.acepta_terminos && (
@@ -190,7 +203,7 @@ export default function LeadModal({ pisoId, isOpen, onClose, onSuccess }: LeadMo
                   disabled={isSubmitting}
                   className="w-full bg-gradient-to-r from-amber-800 to-amber-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-amber-900 hover:to-amber-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? 'Enviando...' : 'Acceder a la información'}
+                  Acceder a la información
                 </button>
               </form>
             </>

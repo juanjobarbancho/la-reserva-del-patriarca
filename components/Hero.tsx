@@ -15,7 +15,7 @@ export default function Hero() {
       <div className="absolute inset-0">
         <Image
           src={heroImages[0]}
-          alt="La Reserva del Patriarca"
+          alt="Reserva del Patriarca"
           fill
           className="object-cover"
           priority
@@ -31,7 +31,7 @@ export default function Hero() {
         </div>
         
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight drop-shadow-lg">
-          La Reserva del
+          Reserva del
           <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-100">
             Patriarca
           </span>
