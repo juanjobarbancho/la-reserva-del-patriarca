@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# La Reserva de La Arruzafa - Web Inmobiliaria
 
-## Getting Started
+## Descripción
 
-First, run the development server:
+Web profesional para la promoción inmobiliaria "La Reserva de La Arruzafa" en Córdoba. 
+Incluye catálogo de pisos disponibles, sistema de captación de leads y formulario de contacto.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tecnologías
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Framework:** Next.js 14+ (App Router)
+- **Lenguaje:** TypeScript
+- **Estilos:** Tailwind CSS
+- **Base de datos:** Supabase (PostgreSQL)
+- **Formularios:** React Hook Form + Zod
+- **Iconos:** Lucide React
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Estructura de la Base de Datos (Supabase)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Tabla: `pisos`
+- `id` (text, primary key)
+- `bloque` (text)
+- `portal` (text)
+- `planta` (text)
+- `tipo` (text)
+- `habitaciones` (integer)
+- `estado` (text: disponible/reservado/vendido)
+- `precio` (integer)
+- `superficie` (integer)
+- `orientacion` (text)
+- `descripcion` (text)
+- `imagenes` (jsonb)
+- `created_at` (timestamp)
 
-## Learn More
+### Tabla: `leads`
+- `id` (uuid, primary key)
+- `nombre` (text)
+- `email` (text)
+- `telefono` (text)
+- `piso_id` (text, foreign key)
+- `origen` (text: piso/contacto)
+- `fecha` (timestamp)
+- `acepta_terminos` (boolean)
 
-To learn more about Next.js, take a look at the following resources:
+### Tabla: `contactos`
+- `id` (uuid, primary key)
+- `nombre` (text)
+- `email` (text)
+- `telefono` (text)
+- `mensaje` (text)
+- `fecha` (timestamp)
+- `acepta_privacidad` (boolean)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Configuración
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clonar el repositorio:**
+   ```bash
+   git clone <repo-url>
+   cd la-reserva-arruza-web
+   ```
 
-## Deploy on Vercel
+2. **Instalar dependencias:**
+   ```bash
+   npm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Configurar variables de entorno:**
+   ```bash
+   cp .env.example .env.local
+   ```
+   Edita `.env.local` con tus credenciales de Supabase.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Configurar Supabase:**
+   - Crea un proyecto en [Supabase](https://supabase.com)
+   - Ejecuta el SQL en `supabase_schema.sql` en el SQL Editor
+   - Copia las crediciales a `.env.local`
+
+5. **Desarrollo:**
+   ```bash
+   npm run dev
+   ```
+
+6. **Build para producción:**
+   ```bash
+   npm run build
+   ```
+
+## Deploy en Vercel
+
+1. Sube el código a GitHub
+2. Conecta el repositorio en [Vercel](https://vercel.com)
+3. Configura las variables de entorno:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+4. Deploy
+
+## Características
+
+- ✅ Hero con información del proyecto
+- ✅ Grid de pisos disponibles (solo se muestran los disponibles)
+- ✅ Modal de captación de leads (gate de datos)
+- ✅ Detalle completo del piso tras verificación
+- ✅ Formulario de contacto general
+- ✅ Diseño responsive y moderno
+- ✅ Paleta de colores: ámbar/dorado corporativo
+- ✅ Animaciones suaves
+- ✅ Integración con Supabase
+
+## Notas
+
+- Los pisos marcados como "reservado" o "vendido" en el Excel no aparecen en la web
+- El sistema de leads guarda los datos en Supabase
+- Se usa sessionStorage para recordar si un usuario ya introdujo sus datos
